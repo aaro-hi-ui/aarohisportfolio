@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Aarohi's Portfolio
 
 ## Project info
 
