@@ -1,6 +1,6 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import profileImage from '@/assets/aarohi-profile.jpg';
+import profileImage from '@/assets/aarohi-real-profile.jpg';
 
 const HeroSection = () => {
   const scrollToAbout = () => {
