@@ -53,7 +53,7 @@ const HeroSection = () => {
                     <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                       <span className="text-primary">WEB</span>
                       <br />
-                      <span className="text-gray-900">Specialist</span>
+                      <span className="text-gray-900">DEVELOPER</span>
                     </h1>
                   </div>
 
