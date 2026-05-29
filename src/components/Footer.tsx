@@ -1,133 +1,108 @@
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
-  const socialLinks = [
-    {
-      icon: Github,
-      href: "https://github.com/aaro-hi-ui",
-      label: "GitHub"
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/aarohi-gangwar-94a9a4276",
-      label: "LinkedIn"
-    },
-    {
-      icon: Mail,
-      href: "mailto:aarohigangwar999@gmail.com",
-      label: "Email"
-    }
+  const socials = [
+    { icon: Github, href: 'https://github.com/aaro-hi-ui', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/aarohi-gangwar-94a9a4276', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:aarohigangwar999@gmail.com', label: 'Email' },
   ];
 
-  const quickLinks = [
+  const links = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#contact', label: 'Contact' },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollTo = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="bg-primary text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Brand & Description */}
+    <footer className="relative bg-card/50 border-t border-border/40 overflow-hidden">
+      {/* Gradient line at top */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
+      {/* Decorative glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-primary/5 blur-[60px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 md:px-6 py-12 relative">
+        <div className="grid md:grid-cols-3 gap-10 mb-10">
+          {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gradient">Aarohi Gangwar</h3>
-            <p className="text-primary-foreground/80 leading-relaxed">
-              AI/ML Specialist and aspiring developer passionate about creating innovative solutions 
-              through technology. Currently pursuing B.Tech in Computer Science with AI/ML specialization.
+            <h3 className="font-display text-2xl font-bold text-gradient">Aarohi Gangwar</h3>
+            <p className="text-foreground/55 text-sm leading-relaxed max-w-xs">
+              AI/ML Developer & Web Engineer. Building intelligent solutions and beautiful interfaces from Greater Noida, India.
             </p>
             <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  size="sm"
-                  asChild
-                  className="text-white hover:text-accent-light hover:bg-white/10 p-2"
+              {socials.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="p-2.5 rounded-xl border border-border/50 text-foreground/50 hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
                 >
-                  <a 
-                    href={social.href} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                </Button>
+                  <Icon className="w-4 h-4" />
+                </a>
               ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
-            <nav className="space-y-2">
-              {quickLinks.map((link, index) => (
+            <h4 className="font-semibold text-foreground text-sm uppercase tracking-widest">Navigation</h4>
+            <nav className="grid grid-cols-2 gap-x-4 gap-y-2">
+              {links.map(({ href, label }) => (
                 <button
-                  key={index}
-                  onClick={() => scrollToSection(link.href)}
-                  className="block text-primary-foreground/80 hover:text-white transition-colors"
+                  key={href}
+                  onClick={() => scrollTo(href)}
+                  className="text-left text-sm text-foreground/55 hover:text-primary transition-colors"
                 >
-                  {link.label}
+                  {label}
                 </button>
               ))}
             </nav>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact snapshot */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Get In Touch</h4>
-            <div className="space-y-2 text-primary-foreground/80">
-              <p>
-                <a 
-                  href="mailto:aarohigangwar999@gmail.com"
-                  className="hover:text-white transition-colors"
-                >
-                  aarohigangwar999@gmail.com
-                </a>
-              </p>
-              <p>
-                <a 
-                  href="tel:+917217579655"
-                  className="hover:text-white transition-colors"
-                >
-                  +91 7217579655
-                </a>
-              </p>
-              <p>Greater Noida, India</p>
-            </div>
-            <Button 
-              asChild 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-primary mt-4"
-            >
-              <a href="/Aarohi_Gangwar_Resume.pdf" download="Aarohi_Gangwar_Resume.pdf">
-                Download Resume
+            <h4 className="font-semibold text-foreground text-sm uppercase tracking-widest">Contact</h4>
+            <div className="space-y-2">
+              <a href="mailto:aarohigangwar999@gmail.com" className="block text-sm text-foreground/55 hover:text-primary transition-colors">
+                aarohigangwar999@gmail.com
               </a>
-            </Button>
+              <a href="tel:+917217579655" className="block text-sm text-foreground/55 hover:text-primary transition-colors">
+                +91 7217579655
+              </a>
+              <p className="text-sm text-foreground/40">Greater Noida, Uttar Pradesh</p>
+            </div>
+            <a
+              href="https://drive.google.com/file/d/1_9dSgefsxiF_402_6ZaX2OcjCkLjoAoC/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex text-sm font-semibold text-primary border border-primary/30 px-4 py-2 rounded-lg hover:bg-primary/10 transition-all"
+            >
+              View Resume
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-primary-foreground/80">
-            <p className="text-sm">
-              © {currentYear} Aarohi Gangwar. All rights reserved.
-            </p>
-            <p className="text-sm flex items-center gap-1">
-              Made with <Heart className="h-4 w-4 text-red-400" /> using React & TypeScript
-            </p>
-          </div>
+        {/* Bottom bar */}
+        <div className="border-t border-border/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-foreground/40">
+            © {year} Aarohi Gangwar · All rights reserved.
+          </p>
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 text-foreground/50 hover:text-primary hover:border-primary/40 text-xs font-semibold transition-all duration-200"
+          >
+            <ArrowUp className="w-3.5 h-3.5" />
+            Back to top
+          </button>
         </div>
       </div>
     </footer>

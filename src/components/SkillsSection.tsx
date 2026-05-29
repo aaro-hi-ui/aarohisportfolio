@@ -1,149 +1,172 @@
-import { Code, Database, Globe, Wrench, Brain, Users } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Code, Database, Globe, Wrench, Brain, Users, Star } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
+
+const skillCategories = [
+  {
+    title: 'Programming Languages',
+    icon: Code,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/20',
+    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'HTML5', 'CSS3'],
+  },
+  {
+    title: 'Frameworks & Libraries',
+    icon: Globe,
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/20',
+    skills: ['React', 'Node.js', 'Express.js', 'Spring Framework', 'Tailwind CSS'],
+  },
+  {
+    title: 'AI / ML & Data',
+    icon: Brain,
+    color: 'text-pink-400',
+    bg: 'bg-pink-500/10',
+    border: 'border-pink-500/20',
+    skills: ['Machine Learning', 'Natural Language Processing', 'NLP', 'Data Structures', 'Algorithms', 'scikit-learn', 'NLTK'],
+  },
+  {
+    title: 'Databases & Storage',
+    icon: Database,
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/20',
+    skills: ['MySQL', 'MongoDB', 'PostgreSQL', 'SQL'],
+  },
+  {
+    title: 'Tools & DevOps',
+    icon: Wrench,
+    color: 'text-green-400',
+    bg: 'bg-green-500/10',
+    border: 'border-green-500/20',
+    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'REST APIs', 'Agile / Scrum'],
+  },
+  {
+    title: 'Soft Skills',
+    icon: Users,
+    color: 'text-yellow-400',
+    bg: 'bg-yellow-500/10',
+    border: 'border-yellow-500/20',
+    skills: ['Problem Solving', 'Team Leadership', 'Communication', 'Event Coordination', 'Mentorship'],
+  },
+];
+
+const proficiencySkills = [
+  { name: 'Java', level: 90 },
+  { name: 'Python', level: 85 },
+  { name: 'JavaScript', level: 80 },
+  { name: 'Machine Learning', level: 75 },
+  { name: 'React', level: 70 },
+  { name: 'Node.js', level: 80 },
+  { name: 'NLP / Text Processing', level: 70 },
+  { name: 'SQL & Databases', level: 80 },
+];
 
 const SkillsSection = () => {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      icon: Code,
-      skills: [
-        { name: "Java", level: 90 },
-        { name: "Python", level: 85 },
-        { name: "JavaScript", level: 80 },
-        { name: "SQL", level: 75 },
-        { name: "HTML", level: 90 },
-        { name: "CSS", level: 85 }
-      ]
-    },
-    {
-      title: "Frameworks & Libraries",
-      icon: Globe,
-      skills: [
-        { name: "Spring Framework", level: 75 },
-        { name: "Node.js", level: 80 },
-        { name: "React", level: 70 },
-        { name: "Express.js", level: 75 }
-      ]
-    },
-    {
-      title: "Databases & Tools",
-      icon: Database,
-      skills: [
-        { name: "MySQL", level: 80 },
-        { name: "GitHub", level: 85 },
-        { name: "Git", level: 85 },
-        { name: "VS Code", level: 90 }
-      ]
-    },
-    {
-      title: "AI/ML & Technologies",
-      icon: Brain,
-      skills: [
-        { name: "Machine Learning", level: 75 },
-        { name: "Natural Language Processing", level: 70 },
-        { name: "Data Structures", level: 80 },
-        { name: "Algorithms", level: 75 }
-      ]
-    },
-    {
-      title: "Development Tools",
-      icon: Wrench,
-      skills: [
-        { name: "Agile Methodology", level: 80 },
-        { name: "API Development", level: 75 },
-        { name: "Responsive Design", level: 85 },
-        { name: "Web Development", level: 80 }
-      ]
-    },
-    {
-      title: "Soft Skills",
-      icon: Users,
-      skills: [
-        { name: "Problem Solving", level: 90 },
-        { name: "Communication", level: 85 },
-        { name: "Teamwork", level: 90 },
-        { name: "Leadership", level: 80 }
-      ]
-    }
-  ];
-
-  const getProgressColor = (level: number) => {
-    if (level >= 85) return "bg-primary";
-    if (level >= 75) return "bg-accent";
-    return "bg-primary-light";
-  };
-
   return (
-    <section id="skills" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 fade-in">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient mb-6">Skills & Expertise</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills, tools, and technologies I work with. 
-            Continuously learning and improving to stay current with industry trends.
-          </p>
-        </div>
+    <section id="skills" className="py-24 relative overflow-hidden bg-secondary/20">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card 
-              key={index} 
-              className="card-gradient border-0 card-shadow hover:primary-shadow transition-all duration-300 slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-primary/10 p-3 rounded-lg">
-                    <category.icon className="h-6 w-6 text-primary" />
+      <div className="container mx-auto px-4 md:px-6 relative">
+        {/* Header */}
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="inline-block text-primary font-semibold text-sm tracking-widest uppercase mb-4">
+              — Technical Skills
+            </span>
+            <h2 className="section-heading text-gradient">Skills & Expertise</h2>
+            <p className="mt-5 text-foreground/60 text-lg max-w-3xl mx-auto leading-relaxed">
+              A comprehensive overview of my technical skills, tools, and technologies.
+              Continuously learning and growing with the latest industry trends.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Skill category cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {skillCategories.map((cat, i) => (
+            <ScrollReveal key={cat.title} delay={i * 80} direction="up">
+              <div className={`glass-card rounded-2xl p-6 border ${cat.border} h-full transition-all duration-300 hover:-translate-y-1 group`}>
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className={`p-2.5 rounded-xl ${cat.bg} ${cat.color} transition-all duration-300 group-hover:scale-110`}>
+                    <cat.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
+                  <h3 className="font-bold text-foreground font-display">{cat.title}</h3>
                 </div>
 
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium text-foreground">{skill.name}</span>
-                        <span className="text-xs text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="relative">
-                        <Progress 
-                          value={skill.level} 
-                          className="h-2 bg-muted"
-                        />
-                        <div 
-                          className={`absolute top-0 left-0 h-2 rounded-full transition-all duration-1000 ${getProgressColor(skill.level)}`}
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                {/* Skill tags */}
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map(skill => (
+                    <span
+                      key={skill}
+                      className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${cat.border} ${cat.bg} ${cat.color} transition-all duration-200 hover:-translate-y-0.5 cursor-default`}
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* Special Achievement Section */}
-        <div className="mt-16 text-center slide-up">
-          <Card className="card-gradient border-0 primary-shadow max-w-2xl mx-auto">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-gradient mb-4">Problem Solving Expertise</h3>
-              <p className="text-muted-foreground mb-4">
-                Active problem solver with experience on competitive programming platforms
-              </p>
-              <div className="flex justify-center items-center gap-4">
-                <div className="bg-primary/10 px-4 py-2 rounded-lg">
-                  <span className="text-primary font-semibold">LeetCode</span>
-                </div>
-                <div className="bg-accent/10 px-4 py-2 rounded-lg">
-                  <span className="text-accent font-semibold">Java Specialization</span>
-                </div>
+        {/* Proficiency bars */}
+        <ScrollReveal>
+          <div className="glass-card rounded-2xl p-8 border border-primary/10">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 rounded-xl bg-primary/10">
+                <Star className="w-5 h-5 text-primary" />
               </div>
-            </CardContent>
-          </Card>
-        </div>
+              <h3 className="text-xl font-bold font-display text-foreground">Proficiency Overview</h3>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-5">
+              {proficiencySkills.map((skill, i) => (
+                <ScrollReveal key={skill.name} delay={i * 60}>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-semibold text-foreground/80">{skill.name}</span>
+                      <span className="text-xs font-bold text-primary">{skill.level}%</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full animate-gradient-shift"
+                        style={{
+                          width: `${skill.level}%`,
+                          background: 'linear-gradient(90deg, hsl(263 70% 60%), hsl(186 100% 42%))',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Platform badges */}
+        <ScrollReveal>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            {[
+              { label: 'LeetCode', desc: 'Competitive Programming', color: 'border-orange-500/30 bg-orange-500/5 text-orange-400' },
+              { label: 'GeeksforGeeks', desc: 'Problem Solving', color: 'border-green-500/30 bg-green-500/5 text-green-400' },
+              { label: 'GitHub', desc: 'Open Source', color: 'border-violet-500/30 bg-violet-500/5 text-violet-400' },
+            ].map(p => (
+              <div
+                key={p.label}
+                className={`px-6 py-3 rounded-2xl border ${p.color} text-center transition-all duration-200 hover:-translate-y-1`}
+              >
+                <p className="font-bold text-sm">{p.label}</p>
+                <p className="text-xs opacity-70 mt-0.5">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
